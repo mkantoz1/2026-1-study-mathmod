@@ -1,0 +1,14 @@
+{
+  "name": "simulation-modeling",
+  "version": "1.0.0",
+  "description": "Имитационное моделирование",
+  "main": "index.js",
+  "repository": "https://gitverse.ru/efekantoz/2026-1-study-simulation-modeling.git",
+  "author": "Mehmet efe kantoz <1032228428@pfur.ru>",
+  "license": "CC-BY-4.0",
+    "config": {
+	"commitizen": {
+	    "path": "cz-customizable"
+	}
+    }
+}

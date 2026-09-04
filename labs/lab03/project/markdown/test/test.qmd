@@ -1,0 +1,94 @@
+```{julia}
+using DifferentialEquations
+using Plots
+
+println("\nМоделирование завершено успешно!")
+```
+
+Начальные условия и коэффициенты (Пример 3.2)
+
+```{julia}
+x0 = 20000.0
+y0 = 9000.0
+u0 = [x0, y0]
+tspan = (0.0, 5.0)
+
+a, b = 0.4, 0.8
+c, h = 0.5, 0.7
+
+P(t) = sin(t) + 1.0
+Q(t) = cos(t) + 1.0
+```
+
+Система дифференциальных уравнений
+
+```{julia}
+function model1!(du, u, p, t)
+    x, y = u
+    du[1] = -a*x - b*y + P(t)
+    du[2] = -c*x - h*y + Q(t)
+end
+
+prob = ODEProblem(model1!, u0, tspan)
+sol = solve(prob, saveat=0.01)
+```
+
+Построение графика
+
+```{julia}
+plot(sol.t, [u[1] for u in sol.u], label="Армия X (Регулярные)", color=:blue, xlabel="Время t", ylabel="Численность", title="Модель 1: Регулярные войска")
+plot!(sol.t, [u[2] for u in sol.u], label="Армия Y (Регулярные)", color=:red)
+
+
+
+x0 = 20000.0
+y0 = 9000.0
+u0 = [x0, y0]
+tspan = (0.0, 5.0)
+
+a, b = 0.4, 0.8
+c = 0.00005 # Масштабированный коэффициент для партизан
+h = 0.7
+
+P(t) = sin(t) + 1.0
+Q(t) = cos(t) + 1.0
+
+function model2!(du, u, p, t)
+    x, y = u
+    du[1] = -a*x - b*y + P(t)
+    du[2] = -c*x*y - h*y + Q(t)
+end
+
+prob = ODEProblem(model2!, u0, tspan)
+sol = solve(prob, saveat=0.01)
+
+plot(sol.t, [u[1] for u in sol.u], label="Армия X (Регулярные)", color=:blue, xlabel="Время t", ylabel="Численность", title="Модель 2: Регулярные vs Партизаны")
+plot!(sol.t, [u[2] for u in sol.u], label="Армия Y (Партизаны)", color=:red)
+
+
+x0 = 20000.0
+y0 = 9000.0
+u0 = [x0, y0]
+tspan = (0.0, 5.0)
+
+a = 0.4
+h = 0.7
+b = 0.00008
+c = 0.00005
+
+P(t) = sin(t) + 1.0
+Q(t) = cos(t) + 1.0
+
+function model3!(du, u, p, t)
+    x, y = u
+    du[1] = -a*x - b*x*y + P(t)
+    du[2] = -h*y - c*x*y + Q(t)
+end
+
+prob = ODEProblem(model3!, u0, tspan)
+sol = solve(prob, saveat=0.01)
+
+plot(sol.t, [u[1] for u in sol.u], label="Армия X (Партизаны)", color=:blue, xlabel="Время t", ylabel="Численность", title="Модель 3: Партизаны vs Партизаны")
+plot!(sol.t, [u[2] for u in sol.u], label="Армия Y (Партизаны)", color=:red)
+```
+

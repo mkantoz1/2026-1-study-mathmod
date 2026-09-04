@@ -1,0 +1,333 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Структура научной презентации},
+  pdfauthor={Mehmet Efe Kantoz},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Структура научной презентации}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Простейший вариант}
+\author{Mehmet Efe Kantoz}
+\date{30.08.2026}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{--- ОТВЕТЫ НА ВОПРОСЫ К ЛАБОРАТОРНОЙ РАБОТЕ
+---}\label{ux43eux442ux432ux435ux442ux44b-ux43dux430-ux432ux43eux43fux440ux43eux441ux44b-ux43a-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux435}
+
+\chapter{1. Модель Мальтуса: dx/dt = kx. Используется для
+экспоненциального
+роста}\label{ux43cux43eux434ux435ux43bux44c-ux43cux430ux43bux44cux442ux443ux441ux430-dxdt-kx.-ux438ux441ux43fux43eux43bux44cux437ux443ux435ux442ux441ux44f-ux434ux43bux44f-ux44dux43aux441ux43fux43eux43dux435ux43dux446ux438ux430ux43bux44cux43dux43eux433ux43e-ux440ux43eux441ux442ux430}
+
+\chapter{или убывания процессов в условиях неограниченных
+ресурсов.}\label{ux438ux43bux438-ux443ux431ux44bux432ux430ux43dux438ux44f-ux43fux440ux43eux446ux435ux441ux441ux43eux432-ux432-ux443ux441ux43bux43eux432ux438ux44fux445-ux43dux435ux43eux433ux440ux430ux43dux438ux447ux435ux43dux43dux44bux445-ux440ux435ux441ux443ux440ux441ux43eux432.}
+
+\chapter{2. Уравнение логистической кривой: dx/dt = kx(N - x). Описывает
+процессы
+роста,}\label{ux443ux440ux430ux432ux43dux435ux43dux438ux435-ux43bux43eux433ux438ux441ux442ux438ux447ux435ux441ux43aux43eux439-ux43aux440ux438ux432ux43eux439-dxdt-kxn---x.-ux43eux43fux438ux441ux44bux432ux430ux435ux442-ux43fux440ux43eux446ux435ux441ux441ux44b-ux440ux43eux441ux442ux430}
+
+\chapter{которые по мере приближения к емкости среды N замедляют свой
+рост.}\label{ux43aux43eux442ux43eux440ux44bux435-ux43fux43e-ux43cux435ux440ux435-ux43fux440ux438ux431ux43bux438ux436ux435ux43dux438ux44f-ux43a-ux435ux43cux43aux43eux441ux442ux438-ux441ux440ux435ux434ux44b-n-ux437ux430ux43cux435ux434ux43bux44fux44eux442-ux441ux432ux43eux439-ux440ux43eux441ux442.}
+
+\chapter{3. Влияние коэффициентов α1(t) и α2(t): α1(t) задает
+интенсивность
+платной}\label{ux432ux43bux438ux44fux43dux438ux435-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux43eux432-ux3b11t-ux438-ux3b12t-ux3b11t-ux437ux430ux434ux430ux435ux442-ux438ux43dux442ux435ux43dux441ux438ux432ux43dux43eux441ux442ux44c-ux43fux43bux430ux442ux43dux43eux439}
+
+\chapter{рекламы, а α2(t) определяет скорость распространения
+сарафанного
+радио.}\label{ux440ux435ux43aux43bux430ux43cux44b-ux430-ux3b12t-ux43eux43fux440ux435ux434ux435ux43bux44fux435ux442-ux441ux43aux43eux440ux43eux441ux442ux44c-ux440ux430ux441ux43fux440ux43eux441ux442ux440ux430ux43dux435ux43dux438ux44f-ux441ux430ux440ux430ux444ux430ux43dux43dux43eux433ux43e-ux440ux430ux434ux438ux43e.}
+
+\chapter{4. При α1(t) \textgreater\textgreater{} α2(t): доминирует
+внешняя платная
+реклама.}\label{ux43fux440ux438-ux3b11t-ux3b12t-ux434ux43eux43cux438ux43dux438ux440ux443ux435ux442-ux432ux43dux435ux448ux43dux44fux44f-ux43fux43bux430ux442ux43dux430ux44f-ux440ux435ux43aux43bux430ux43cux430.}
+
+\chapter{5. При α1(t) \textless\textless{} α2(t): доминирует сарафанное
+радио (лавинообразный
+процесс).}\label{ux43fux440ux438-ux3b11t-ux3b12t-ux434ux43eux43cux438ux43dux438ux440ux443ux435ux442-ux441ux430ux440ux430ux444ux430ux43dux43dux43eux435-ux440ux430ux434ux438ux43e-ux43bux430ux432ux438ux43dux43eux43eux431ux440ux430ux437ux43dux44bux439-ux43fux440ux43eux446ux435ux441ux441.}
+
+using DifferentialEquations using Plots
+
+println(\enquote{\nМоделирование завершено успешно!})
+
+\chapter{Параметры и начальные
+условия}\label{ux43fux430ux440ux430ux43cux435ux442ux440ux44b-ux438-ux43dux430ux447ux430ux43bux44cux43dux44bux435-ux443ux441ux43bux43eux432ux438ux44f}
+
+N = 5000.0 I0 = 150.0 R0 = 0.0 S0 = N - I0 - R0
+
+a = 0.001 \# коэффициент заболеваемости (alpha) b = 0.05 \# коэффициент
+выздоровления (beta)
+
+u0 = {[}S0, I0, R0{]} tspan = (0.0, 200.0) p = (a, b)
+
+\chapter{Система дифференциальных уравнений для случая
+(a)}\label{ux441ux438ux441ux442ux435ux43cux430-ux434ux438ux444ux444ux435ux440ux435ux43dux446ux438ux430ux43bux44cux43dux44bux445-ux443ux440ux430ux432ux43dux435ux43dux438ux439-ux434ux43bux44f-ux441ux43bux443ux447ux430ux44f-a}
+
+function epidemic\_case\_a!(du, u, p, t) S, I, R = u alpha, beta = p
+du{[}1{]} = 0.0 \# dS/dt du{[}2{]} = -beta * I \# dI/dt du{[}3{]} = beta
+* I \# dR/dt end
+
+prob\_a = ODEProblem(epidemic\_case\_a!, u0, tspan, p) sol\_a =
+solve(prob\_a, Tsit5(), saveat=0.5)
+
+\chapter{Построение
+графиков}\label{ux43fux43eux441ux442ux440ux43eux435ux43dux438ux435-ux433ux440ux430ux444ux438ux43aux43eux432}
+
+plot(sol\_a.t, {[}u{[}1{]} for u in sol\_a.u{]}, label=\enquote{S(t) -
+Восприимчивые}, color=:blue, linewidth=2) plot!(sol\_a.t, {[}u{[}2{]}
+for u in sol\_a.u{]}, label=\enquote{I(t) - Инфицированные},
+color=:green, linewidth=2) plot!(sol\_a.t, {[}u{[}3{]} for u in
+sol\_a.u{]}, label=\enquote{R(t) - С иммунитетом}, color=:red,
+linewidth=2)
+
+xlabel!(\enquote{Время (t)}) ylabel!(\enquote{Количество людей})
+title!(\enquote{Динамика эпидемии: случай I(0) \textless= I*
+(Изоляция)})
+
+\chapter{Система дифференциальных уравнений для случая
+(б)}\label{ux441ux438ux441ux442ux435ux43cux430-ux434ux438ux444ux444ux435ux440ux435ux43dux446ux438ux430ux43bux44cux43dux44bux445-ux443ux440ux430ux432ux43dux435ux43dux438ux439-ux434ux43bux44f-ux441ux43bux443ux447ux430ux44f-ux431}
+
+function epidemic\_case\_b!(du, u, p, t) S, I, R = u alpha, beta = p
+du{[}1{]} = -alpha * S * I \# dS/dt du{[}2{]} = alpha * S * I - beta * I
+\# dI/dt du{[}3{]} = beta * I \# dR/dt end
+
+prob\_b = ODEProblem(epidemic\_case\_b!, u0, tspan, p) sol\_b =
+solve(prob\_b, Tsit5(), saveat=0.5)
+
+\chapter{Построение
+графиков}\label{ux43fux43eux441ux442ux440ux43eux435ux43dux438ux435-ux433ux440ux430ux444ux438ux43aux43eux432-1}
+
+plot(sol\_b.t, {[}u{[}1{]} for u in sol\_b.u{]}, label=\enquote{S(t) -
+Восприимчивые}, color=:blue, linewidth=2) plot!(sol\_b.t, {[}u{[}2{]}
+for u in sol\_b.u{]}, label=\enquote{I(t) - Инфицированные},
+color=:green, linewidth=2) plot!(sol\_b.t, {[}u{[}3{]} for u in
+sol\_b.u{]}, label=\enquote{R(t) - С иммунитетом}, color=:red,
+linewidth=2)
+
+xlabel!(\enquote{Время (t)}) ylabel!(\enquote{Количество людей})
+title!(\enquote{Динамика эпидемии: случай I(0) \textgreater{} I*
+(Распространение)})
+
+\chapter{--- СОХРАНЕНИЕ ГРАФИКОВДЛЯ ОТЧЕТА
+---}\label{ux441ux43eux445ux440ux430ux43dux435ux43dux438ux435-ux433ux440ux430ux444ux438ux43aux43eux432ux434ux43bux44f-ux43eux442ux447ux435ux442ux430}
+
+grafik 1(\textbf{?@fig-001})
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio,alt={grafik1}]{image/1.png}
+grafik 2(\textbf{?@fig-002})
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio,alt={grafik2}]{image/2.png}
+grafik 3(\textbf{?@fig-003})
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio,alt={grafik3}]{image/3.png}
+grafik 4(\textbf{?@fig-004})
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio,alt={grafik4}]{image/4.png}
+grafik 5(\textbf{?@fig-005})
+\includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio,alt={grafik5}]{image/5.png}
+
+Выводы В ходе выполнения лабораторной работы была изучена математическая
+модель распространения рекламы, учитывающая как внешние маркетинговые
+инвестиции (платную рекламу), так и внутренние коммуникативные процессы
+(«сарафанное радио»). С помощью программной реализации в среде Julia
+были построены графики динамики охвата аудитории для различных режимов
+работы коэффициентов интенсивности, определены моменты максимальной
+скорости роста информированности рынка, а также сопоставлены сценарии с
+раздельным и совместным действием рекламных факторов.
+
+Список литературы\{.unnumbered\} ::: \{\#refs\} :::
+
+
+\printbibliography
+
+
+
+\end{document}
