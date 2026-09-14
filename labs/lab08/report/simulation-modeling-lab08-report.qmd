@@ -1,19 +1,19 @@
 ---
-title: "Отчет по лабораторной работе №8"
-subtitle: "Имитационное моделирование"
+title: "Структура научной презентации"
+subtitle: "Простейший вариант"
 author:
-  - name: Mehmet Efe Kantoz
-    degrees: DSc
-    orcid: 0000-0002-0877-7063
-    email: 1032228428@pfur.ru
-    affiliations:
-      - name: Российский университет дружбы народов
-        country: Российская Федерация
-        postal-code: 117198
-        city: Москва
-        address: ул. Миклухо-Маклая, д. 6
+  name: "Mehmet Efe Kantoz"
+  no: "1032228428"
+  email: "1032228428@pfur.ru"
+  affiliation:
+    - name: "Российский университет дружбы народов"
+      country: "Российская Федерация"
+      postal-code: "117198"
+      city: "Москва"
+      address: "ул. Миклухо-Маклая, д. 6"
 license: "CC BY"
-format: beamer
+date: "2026-08-30"
+date-format: "DD.MM.YYYY"
 execute:
   eval: false
 ---
@@ -74,13 +74,16 @@ sol3 = solve(ODEProblem(model3!, u0, tspan), saveat=0.05)
 
 
 # --- СОХРАНЕНИЕ ГРАФИКОВДЛЯ ОТЧЕТА ---
-  grafik 1([рис. @fig-001])
+  grafik 1
 ![grafik1](image/1.png){#fig-001 width=70%}
 
 
 
 
-  grafik 2([рис. @fig-002])
+
+
+
+  grafik 2
 ![grafik2](image/2.png){#fig-002 width=70%}
 
 

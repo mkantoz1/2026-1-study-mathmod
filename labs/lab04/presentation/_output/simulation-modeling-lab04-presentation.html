@@ -1053,18 +1053,8 @@ Mehmet Efe Kantoz <a href="https://orcid.org/0000-0002-0877-7063" class="quarto-
 <p>w0_sq = 3.5 # w0^2 (квадрат собственной частоты) gamma = 0.5 # g (параметр затухания) u0 = [1.0, -0.5] # [x(0), x’(0)] tspan = (0.0, 50.0) # Интервал времени t</p>
 </section>
 
-<section id="section" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
-
-</section>
-
 <section id="модель-1-гармонический-осциллятор-без-затухания-x-w02-x-0" class="title-slide slide level1 center">
 <h1>1. МОДЕЛЬ 1: Гармонический осциллятор без затухания (x’’ + w0^2 * x = 0)</h1>
-
-</section>
-
-<section id="section-1" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
 <p>function model1!(du, u, p, t) du[1] = u[2] du[2] = -w0_sq * u[1] end</p>
 <p>prob1 = ODEProblem(model1!, u0, tspan) sol1 = solve(prob1, saveat=0.05)</p>
 </section>
@@ -1079,18 +1069,8 @@ Mehmet Efe Kantoz <a href="https://orcid.org/0000-0002-0877-7063" class="quarto-
 <p>p1_phase = plot(sol1, vars=(1, 2), label=“Фазовая траектория”, xlabel=“Координата x”, ylabel=“Скорость x’”, title=“1. Фазовый портрет (без затухания)”, color=:darkblue, lw=1.5)</p>
 </section>
 
-<section id="section-2" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
-
-</section>
-
 <section id="модель-2-свободные-колебания-с-затуханием-x-2gx-w02-x-0" class="title-slide slide level1 center">
 <h1>2. МОДЕЛЬ 2: Свободные колебания с затуханием (x’’ + 2g<em>x’ + w0^2 </em> x = 0)</h1>
-
-</section>
-
-<section id="section-3" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
 <p>function model2!(du, u, p, t) du[1] = u[2] du[2] = -2 * gamma * u[2] - w0_sq * u[1] end</p>
 <p>prob2 = ODEProblem(model2!, u0, tspan) sol2 = solve(prob2, saveat=0.05)</p>
 </section>
@@ -1105,18 +1085,8 @@ Mehmet Efe Kantoz <a href="https://orcid.org/0000-0002-0877-7063" class="quarto-
 <p>p2_phase = plot(sol2, vars=(1, 2), label=“Фазовая траектория”, xlabel=“Координата x”, ylabel=“Скорость x’”, title=“2. Фазовый портрет (с затуханием)”, color=:maroon, lw=1.5)</p>
 </section>
 
-<section id="section-4" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
-
-</section>
-
 <section id="модель-3-колебания-под-действием-внешней-силы-x-2gx-w02-x-ft" class="title-slide slide level1 center">
 <h1>3. МОДЕЛЬ 3: Колебания под действием внешней силы (x’’ + 2g<em>x’ + w0^2 </em> x = f(t))</h1>
-
-</section>
-
-<section id="section-5" class="title-slide slide level1 center">
-<h1>==============================================================================</h1>
 <p>f(t) = 0.7 * sin(2.0 * t)</p>
 <p>function model3!(du, u, p, t) du[1] = u[2] du[2] = -2 * gamma * u[2] - w0_sq * u[1] + f(t) end</p>
 <p>prob3 = ODEProblem(model3!, u0, tspan) sol3 = solve(prob3, saveat=0.05)</p>
